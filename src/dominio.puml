@@ -1,0 +1,23 @@
+@startuml
+entity Instrumento{
+Codigo
+Precio
+Stock
+Tipo de Instrumento
+Detalles Tipo de Instrumento
+}
+entity Trabajador{}
+entity Inventario{
+Instrumento de Cuerda
+Instrumento de Percusion
+Instrumento de Viento
+}
+entity Boleta{
+Instrumento Vendido
+Precio
+}
+Trabajador "1..*" -- "1" Inventario:> registra
+Inventario "1" -- "1..*" Instrumento:> almacena
+Trabajador "1..*" -- "1..*" Instrumento:> vende
+Instrumento "1" -- "1" Boleta:> genera
+@enduml

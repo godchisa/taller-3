@@ -1,0 +1,79 @@
+@startuml
+top to bottom direction
+skin rose
+
+abstract Instrumento{
+- tipo: string
+- codigo: string
+- precio: int
+- stock: int
+- material: string
++ Instrumento(tipo: string, codigo: string, precio: int, stock: int, material: string)
++ getTipo(): string
++ getCodigo(): string
++ getPrecio(): int
++ getStock(): int
++ getMaterial(): string
+}
+
+class Cuerda{
+- instrumento: string
+- tipoCuerda: string
+- numCuerdas: int
+- tipoSonido: string
++ Cuerda(instrumento: string, tipoCuerda: string, numCuerdas: int, material: string, tipoSonido: string)
++ getInstrumento(): string
++ getTipoCuerda(): string
++ getNumCuerdas(): int
++ getTipoSonido(): string
+}
+
+class Percusion{
+- instrumento: string
+- tipoSonido: string
+- altura: string
++ Percusion (instrumento: string, tipoSonido: string, material: string, altura: string)
++ getInstrumento(): string
++ getTipoSonido(): string
++ getAltura(): string
+}
+
+class Viento{
+- instrumento: string
++ Viento(instrumento: string, material: string)
++ getInstrumento(): string
+}
+
+class listaInstrumento{
+- cantMax: int
+- cantActual: int
+- listaInstrumento: Instrumento[]
++ listaInstrumento(cantMax: int)
++ getCantMax(): int
++ getCantActual(): int
++ ingresarInstrumento(instrumento: Instrumento): void
++ buscarInstrumento(codigo: string): Instrumento
+}
+
+interface Sistema{
++ agregarInstrumento(): void
++ venderInstrumento(codigo: string): void
++ consultaInventarioTipo(tipo: string): string[]
++ consultaInventarioCodigo(codigo: string): Instrumento
++ datosInstrumento(codigo: string): Instrumento
++ salir(): void
+}
+
+class SistemaImpl{
+- inventario: listaInstrumento
++ SistemaImpl()
++ menuSistema(): void
+}
+
+Sistema<|..SistemaImpl: implements
+Sistema --> "1" listaInstrumento
+listaInstrumento "1" o--> "1..*" Instrumento
+Instrumento <|-- Cuerda
+Instrumento <|-- Percusion
+Instrumento <|-- Viento
+@enduml
